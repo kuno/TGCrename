@@ -115,6 +115,14 @@ renameLFILES() {
 		if [ "$result" -eq "0" ]; then
 			mv "${LFILES[$i]}" "`echo ${LFILES[$i]} | perl -p -e 's/^L//gi'`"
 		fi
+
+		temp=`echo ${LFILES[$i]} | grep -i "chapter_"`
+		result=$?
+		if [ "$result" -eq "0" ]; then
+#			mv "${LFILES[$i]}" "`echo ${LFILES[$i]} | sed 's/.*[Ll]ecture-//g'`"
+			mv "${LFILES[$i]}" "`echo ${LFILES[$i]} | perl -p -e 's/.*chapter_//gi'`"
+		fi
+
 		temp=`echo ${LFILES[$i]} | grep -i "lecture-"`
 		result=$?
 		if [ "$result" -eq "0" ]; then
